@@ -1,0 +1,95 @@
+name: HAMBA_X4
+num_gpu: auto
+manual_seed: 0
+resume_training: False
+
+# dataset and data loader settings
+
+ # train:
+train_file_pth: /home/cjrathod/scratch/Paired_imagenet_data.h5
+train_indices:
+
+#  val:
+val_file_pth: /home/cjrathod/scratch/paired_val_set14.h5
+val_indices: 
+#test: 
+test_file_pth: /home/cjrathod/scratch/paired_val_set5.h5
+test_indices:
+# Dataloaders
+#train_dataloader:
+train_batch_size: 4
+train_shuffle : True
+#val_dataloader:
+val_batch_size: 1
+val_shuffle: false
+# Checkpoints
+checkpoint: 
+#network_g:
+model_type: HAMBA
+in_chans: 3
+input_resolution: 64
+embed_dim: 96
+num_heads:  8
+num_block:  6 
+patch_size:  4
+img_size:  64
+window_size: 8
+overlap_ratio:  0.5
+norm_layer: 'LayerNorm'
+act: 'GELU'
+upscale : 4 
+upsampler:  'pixelshuffle'
+img_range:  1.
+shift_size: 0
+compress_ratio: 3
+squeeze_factor: 30
+drop_rate: 0.
+conv_scale: 0.01
+mlp_ratio: 4.
+qkv_bias: True
+qk_scale: 'None'
+patch_norm: True
+ape: False
+drop: 0.
+attn_drop: 0.
+drop_path: 0.
+d_state: 16
+d_conv: 4
+expand: 2
+dt_rank: "auto"
+dt_min: 0.001
+dt_max: 0.1
+dt_init: "random"
+dt_scale: 1.0
+dt_init_floor: 1e-4
+conv_bias: True
+bias: False
+use_fast_path: True 
+layer_idx: None
+device: 'cuda'
+dtype: 'None'
+
+#train:
+epoch: 200
+ema_decay: 0.999
+#optim_g:
+type: Adam
+lr: !!float 1e-5
+weight_decay: 0
+betas: [0.9, 0.99]
+
+#scheduler:
+type: MultiStepLR
+milestones: [25, 50, 75, 100, 125, 150, 175, 180]
+gamma: 0.5
+
+warmup_iter: -1  # no warm up
+
+  # losses
+#pixel_opt:
+type: L1Loss
+loss_weight: 1.0
+reduction: mean
+results: /home/cjrathod/projects/def-mhassanz/cjrathod/Efficient-Hat/results
+checkpoint: /home/cjrathod/projects/def-mhassanz/cjrathod/Efficient-Hat/checkpoints
+device: cuda

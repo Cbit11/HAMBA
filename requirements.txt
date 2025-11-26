@@ -5,3 +5,5 @@ tqdm
 yaml
 PIL
 torchvision
+mamba-ssm
+wandb
